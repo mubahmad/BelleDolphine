@@ -63,6 +63,13 @@ def move (x):
 
             print("Forward")
 
+            sleep (2)
+
+            GPIO.output(in1,GPIO.LOW)
+            GPIO.output(in2,GPIO.LOW)
+            GPIO.output(in3,GPIO.LOW)
+            GPIO.output(in4,GPIO.LOW)
+
          elif x == 's':
             GPIO.output(in1,GPIO.LOW)
             GPIO.output(in2,GPIO.HIGH)
@@ -70,6 +77,13 @@ def move (x):
             GPIO.output(in3,GPIO.LOW)
             GPIO.output(in4,GPIO.HIGH)
             print('Back')
+
+            sleep (2)
+
+            GPIO.output(in1,GPIO.LOW)
+            GPIO.output(in2,GPIO.LOW)
+            GPIO.output(in3,GPIO.LOW)
+            GPIO.output(in4,GPIO.LOW)
 
          elif x == 'd':
             GPIO.output(in1,GPIO.LOW)
@@ -79,6 +93,13 @@ def move (x):
             GPIO.output(in4,GPIO.LOW)
             print('Right')
 
+            sleep (0.5)
+
+            GPIO.output(in1,GPIO.LOW)
+            GPIO.output(in2,GPIO.LOW)
+            GPIO.output(in3,GPIO.LOW)
+            GPIO.output(in4,GPIO.LOW)
+
          elif x == 'a':
             GPIO.output(in1,GPIO.HIGH)
             GPIO.output(in2,GPIO.LOW)
@@ -86,6 +107,13 @@ def move (x):
             GPIO.output(in3,GPIO.LOW)
             GPIO.output(in4,GPIO.HIGH)
             print('Left')
+            
+            sleep (0.5)
+
+            GPIO.output(in1,GPIO.LOW)
+            GPIO.output(in2,GPIO.LOW)
+            GPIO.output(in3,GPIO.LOW)
+            GPIO.output(in4,GPIO.LOW)
 
          # Press 'c' to exit the script
          elif x == 'c':
