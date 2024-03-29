@@ -1,3 +1,3 @@
 from movement import move
 
-move(input())
+move()
