@@ -1,3 +1,4 @@
 from movement import move
+import clean
 
-move(input())
+clean()
