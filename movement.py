@@ -7,14 +7,14 @@ power = 100
 speed = 0.073
 travelRatio = power * speed / 100
 
-# Right Motor
+# Right Motor enb in3 in4
+en_a = 4
 in1 = 17
 in2 = 27
-en_a = 4
-# Left Motor
+# Left Motor ena  in2 in1
+en_b = 13
 in3 = 5
 in4 = 6
-en_b = 13
 
 
 GPIO.setmode(GPIO.BCM)
