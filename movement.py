@@ -3,7 +3,7 @@ from time import sleep
 
 GPIO.setwarnings(False)
 
-power = 100
+power = 50
 speed = 0.073
 travelRatio = power * speed / 100
 
@@ -26,29 +26,26 @@ GPIO.setup(in3, GPIO.OUT)
 GPIO.setup(in4, GPIO.OUT)
 GPIO.setup(en_b, GPIO.OUT)
 
-pwrL = GPIO.PWM(en_a, 100)
-pwrR = GPIO.PWM(en_b, 100)
-pwrL.start(75)
-pwrR.start(75)
-
 GPIO.output(in1,GPIO.LOW)
 GPIO.output(in2,GPIO.LOW)
 GPIO.output(in4,GPIO.LOW)
 GPIO.output(in3,GPIO.LOW)
 
-def move (x):
+def move (x, power):
    
 # Wrap main content in a try block so we can  catch the user pressing CTRL-C and run the
 # GPIO cleanup function. This will also prevent the user seeing lots of unnecessary error messages.
    try:
    # Create Infinite loop to read user input
-      while(True):
+         while(True):
          # Get user Input
-         
+            pwrL = GPIO.PWM(en_a, 100)
+            pwrR = GPIO.PWM(en_b, 100)
+            pwrL.start(power)
+            pwrR.start(power)
 
          # To see users input
          # print(user_input)
-
             if x == "w":
                 GPIO.output(in1, GPIO.HIGH)
                 GPIO.output(in2, GPIO.LOW)
