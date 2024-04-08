@@ -19,29 +19,30 @@ GPIO.setup(collision_L, GPIO.IN)
 def random_rotation_time():
     return random.uniform(0.2, 1.5)
 
+
 # Main loop
 try:
     while True:
         # Check for cliff and collision
-        if GPIO.input(cliff_pin) or GPIO.input(collision_C):
-            move('c', 50)
-            move('s', 50)
+        if not (GPIO.input(cliff_pin)) or GPIO.input(collision_C):
+            move("c", 50)
+            move("s", 50)
             time.sleep(0.5)
-            move('c', 50)  # Stop the robot
+            move("c", 50)  # Stop the robot
             rotation_time = random_rotation_time()
             # Generate a random direction
-            direction = random.choice(['a', 'd'])
+            direction = random.choice(["a", "d"])
             move(direction)
             time.sleep(rotation_time)
         elif GPIO.input(collision_L):
-            while (GPIO.input(collision_L)):
-             move('d', 50)
+            while GPIO.input(collision_L):
+                move("d", 50)
         elif GPIO.input(collision_R):
-            while (GPIO.input(collision_R)):
-             move('a', 50)      
+            while GPIO.input(collision_R):
+                move("a", 50)
         else:
-            move('w', 70)
-        
+            move("w", 70)
+
 except KeyboardInterrupt:
     pass
 finally:
