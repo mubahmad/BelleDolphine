@@ -26,71 +26,71 @@ GPIO.setup(in3, GPIO.OUT)
 GPIO.setup(in4, GPIO.OUT)
 GPIO.setup(en_b, GPIO.OUT)
 
-GPIO.output(in1,GPIO.LOW)
-GPIO.output(in2,GPIO.LOW)
-GPIO.output(in4,GPIO.LOW)
-GPIO.output(in3,GPIO.LOW)
-
-def move (x, power):
-   
-# Wrap main content in a try block so we can  catch the user pressing CTRL-C and run the
-# GPIO cleanup function. This will also prevent the user seeing lots of unnecessary error messages.
-   try:
-   # Create Infinite loop to read user input
-         while(True):
-         # Get user Input
-            pwrL = GPIO.PWM(en_a, 100)
-            pwrR = GPIO.PWM(en_b, 100)
-            pwrL.start(power)
-            pwrR.start(power)
-
-         # To see users input
-         # print(user_input)
-            if x == "w":
-                GPIO.output(in1, GPIO.HIGH)
-                GPIO.output(in2, GPIO.LOW)
-
-                GPIO.output(in3, GPIO.HIGH)
-                GPIO.output(in4, GPIO.LOW)
-
-                print("Forward")
+GPIO.output(in1, GPIO.LOW)
+GPIO.output(in2, GPIO.LOW)
+GPIO.output(in4, GPIO.LOW)
+GPIO.output(in3, GPIO.LOW)
 
 
-            elif x == "s":
-                GPIO.output(in1, GPIO.LOW)
-                GPIO.output(in2, GPIO.HIGH)
+def move(x, power):
 
-                GPIO.output(in3, GPIO.LOW)
-                GPIO.output(in4, GPIO.HIGH)
-                print("Back")
+    # Wrap main content in a try block so we can  catch the user pressing CTRL-C and run the
+    # GPIO cleanup function. This will also prevent the user seeing lots of unnecessary error messages.
+    try:
+        # Create Infinite loop to read user input
+        pwrL = GPIO.PWM(en_a, 100)
+        pwrR = GPIO.PWM(en_b, 100)
 
-            elif x == 'd':
-               GPIO.output(in1,GPIO.LOW)
-               GPIO.output(in2,GPIO.HIGH)
+        # Get user Input
+        pwrL.start(power)
+        pwrR.start(power)
 
-               GPIO.output(in3, GPIO.HIGH)
-               GPIO.output(in4, GPIO.LOW)
-               print("Right")
+        # To see users input
+        # print(user_input)
+        if x == "w":
+            GPIO.output(in1, GPIO.HIGH)
+            GPIO.output(in2, GPIO.LOW)
 
-            elif x == 'a':
-               GPIO.output(in1,GPIO.HIGH)
-               GPIO.output(in2,GPIO.LOW)
+            GPIO.output(in3, GPIO.HIGH)
+            GPIO.output(in4, GPIO.LOW)
 
-               GPIO.output(in3,GPIO.LOW)
-               GPIO.output(in4,GPIO.HIGH)
-               print('Left') 
+            print("Forward")
 
-            # Press 'c' to exit the script
-            elif x == "c":
-                GPIO.output(in1, GPIO.LOW)
-                GPIO.output(in2, GPIO.LOW)
+        elif x == "s":
+            GPIO.output(in1, GPIO.LOW)
+            GPIO.output(in2, GPIO.HIGH)
 
-                GPIO.output(in4, GPIO.LOW)
-                GPIO.output(in3, GPIO.LOW)
-                print("Stop")
+            GPIO.output(in3, GPIO.LOW)
+            GPIO.output(in4, GPIO.HIGH)
+            print("Back")
+
+        elif x == "d":
+            GPIO.output(in1, GPIO.LOW)
+            GPIO.output(in2, GPIO.HIGH)
+
+            GPIO.output(in3, GPIO.HIGH)
+            GPIO.output(in4, GPIO.LOW)
+            print("Right")
+
+        elif x == "a":
+            GPIO.output(in1, GPIO.HIGH)
+            GPIO.output(in2, GPIO.LOW)
+
+            GPIO.output(in3, GPIO.LOW)
+            GPIO.output(in4, GPIO.HIGH)
+            print("Left")
+
+        # Press 'c' to exit the script
+        elif x == "c":
+            GPIO.output(in1, GPIO.LOW)
+            GPIO.output(in2, GPIO.LOW)
+
+            GPIO.output(in4, GPIO.LOW)
+            GPIO.output(in3, GPIO.LOW)
+            print("Stop")
 
     # If user press CTRL-C
-   except KeyboardInterrupt:
-          # Reset GPIO settings
-         GPIO.cleanup()
-         print("GPIO Clean up")
+    except KeyboardInterrupt:
+        # Reset GPIO settings
+        GPIO.cleanup()
+        print("GPIO Clean up")
