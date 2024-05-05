@@ -20,7 +20,7 @@ def random_rotation_time():
     return random.uniform(20, 150)
 
 
-# Main loop
+
 def clean():
     # Check for cliff and collision
     if (GPIO.input(cliff_pin)) or not GPIO.input(collision_C):
@@ -42,3 +42,4 @@ def clean():
     else:
         print("clear")
         move("w", 50)
+
