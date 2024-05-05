@@ -1,5 +1,2 @@
-from movement import move
-import clean
-#comment
-#abdullah is gay
-clean()
+
+## now we need to start detecting doors and IR light intensity
