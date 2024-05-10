@@ -18,7 +18,7 @@ GPIO.setup(collision_L, GPIO.IN)
 
 # Function to generate random rotation time
 def random_rotation_time():
-    return random.uniform(20, 150)
+    return random.uniform(1,4)
 
 
 def clean(wet, blow, rotate):
@@ -49,15 +49,13 @@ def clean(wet, blow, rotate):
 def scan():
     # Check for cliff and collision
     if (GPIO.input(cliff_pin)) or not GPIO.input(collision_C):
-        move("c", 50)
         move("s", 50)
-        time.sleep(0.5)
-        move("c", 50)  # Stop the robot
+        time.sleep(2)
         rotation_time = random_rotation_time()
         # Generate a random direction
         direction = random.choice(["a", "d"])
         move(direction, 50)
-        # time.sleep(rotation_time)
+        time.sleep(rotation_time)
     elif not GPIO.input(collision_L):
         print("object in left")
         move("d", 50)
