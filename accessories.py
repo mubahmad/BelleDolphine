@@ -13,10 +13,12 @@ in3 = 8
 servo_pin = 3
 
 GPIO.setmode(GPIO.BCM)
+
 GPIO.setup(in1, GPIO.OUT)
 GPIO.setup(en_a, GPIO.OUT)
 GPIO.setup(in3, GPIO.OUT)
 GPIO.setup(en_b, GPIO.OUT)
+GPIO.setup(servo_pin, GPIO.OUT)
 
 GPIO.output(in1, GPIO.LOW)
 GPIO.output(in3, GPIO.LOW)
