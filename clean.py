@@ -21,7 +21,7 @@ def clean(wet, blow, rotate):
     sweep(rotate, 70)
     # Check for cliff and collision
     if (GPIO.input(cliff_pin)) or not GPIO.input(collision_C):
-       print("moving backwards")
+        print("moving backwards")
         move("s", 50)
         time.sleep(2)
         print("rotating")
