@@ -50,9 +50,10 @@ def sweep(state, power):
         GPIO.output(in3, GPIO.LOW)
         print("not sweeping")
 
+
 def mop(state):
-    pwm = GPIO.PWM(servo_pin, 100)
+    srv = GPIO.PWM(servo_pin, 100)
     if state:  # Move to position 1 (e.g., True)
-        pwm.start(2.5)  # Duty cycle for position 1
+        srv.start(2.5)  # Duty cycle for position 1
     else:  # Move to position 2 (e.g., False)
-        pwm.start(7.5)  # Duty cycle for position 2
+        srv.start(7.5)  # Duty cycle for position 2

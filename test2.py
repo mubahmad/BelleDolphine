@@ -4,7 +4,7 @@ from clean import clean
 
 try:
     while True:
-        clean()
+        clean(False, True, True)
 except KeyboardInterrupt:
     print("Program terminated")
 finally:

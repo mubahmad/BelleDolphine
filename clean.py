@@ -20,11 +20,10 @@ def random_rotation_time():
     return random.uniform(20, 150)
 
 
-
 def clean(wet, blow, rotate):
     mop(wet)
-    suck(blow, 70)
-    sweep(rotate, 50)
+    suck(blow, 100)
+    sweep(rotate, 70)
     # Check for cliff and collision
     if (GPIO.input(cliff_pin)) or not GPIO.input(collision_C):
         move("c", 50)
@@ -45,4 +44,3 @@ def clean(wet, blow, rotate):
     else:
         print("clear")
         move("w", 50)
-

@@ -1,21 +1,37 @@
 import RPi.GPIO as GPIO
 import time
-from accessories import suck
 
+# Set up GPIO using BCM numbering
 GPIO.setmode(GPIO.BCM)
 
-# Assuming the IR sensor is connected to GPIO 23
-cliff = 23
-GPIO.setup(cliff, GPIO.IN)
+# Define GPIO pins for the H-bridge
+enb_pin = 7
+in3_pin = 8
 
-try:
-    while True:
-        if not GPIO.input(cliff):  # Assuming HIGH signal means IR is ON
-            suck(True, 100)  # Replace 50 with the desired power level
-        else:
-            suck(False, 0)
-except KeyboardInterrupt:
-    print("Program terminated")
-finally:
-    suck.pwrB.stop()  # Stop the PWM
-    GPIO.cleanup()  # Clean up all GPIO
+# Set up GPIO pins for the H-bridge
+GPIO.setup(enb_pin, GPIO.OUT)
+GPIO.setup(in3_pin, GPIO.OUT)
+
+# Create PWM object for motor speed control
+motor_pwm = GPIO.PWM(enb_pin, 100)  # PWM with frequency 100Hz
+
+
+def sweep_motor():
+    # Move the motor forward
+    GPIO.output(in3_pin, GPIO.HIGH)
+
+    # Start PWM with 50% duty cycle
+    motor_pwm.start(50)
+
+
+# Cleanup GPIO on exit
+def cleanup():
+    GPIO.cleanup()
+
+
+# Example usage
+while True:
+    try:
+        sweep_motor()
+    except KeyboardInterrupt:
+        cleanup()  # Cleanup GPIO on Ctrl+C

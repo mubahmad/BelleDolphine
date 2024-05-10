@@ -38,6 +38,7 @@ def move(x, power):
     # GPIO cleanup function. This will also prevent the user seeing lots of unnecessary error messages.
     try:
         # Create Infinite loop to read user input
+        GPIO.setmode(GPIO.BCM)
         pwrL = GPIO.PWM(en_a, 100)
         pwrR = GPIO.PWM(en_b, 100)
 
