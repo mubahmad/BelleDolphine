@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import random
 from movement import move
+import time
 from accessories import mop, suck, sweep
 
 # Set up GPIO pins
@@ -30,6 +31,28 @@ def clean(wet, blow, rotate):
         # move("s", 50)
         # time.sleep(0.5)
         # move("c", 50)  # Stop the robot
+        rotation_time = random_rotation_time()
+        # Generate a random direction
+        direction = random.choice(["a", "d"])
+        move(direction, 50)
+        # time.sleep(rotation_time)
+    elif not GPIO.input(collision_L):
+        print("object in left")
+        move("d", 50)
+    elif not GPIO.input(collision_R):
+        print("object in right")
+        move("a", 50)
+    else:
+        print("clear")
+        move("w", 50)
+
+def scan():
+    # Check for cliff and collision
+    if (GPIO.input(cliff_pin)) or not GPIO.input(collision_C):
+        move("c", 50)
+        move("s", 50)
+        time.sleep(0.5)
+        move("c", 50)  # Stop the robot
         rotation_time = random_rotation_time()
         # Generate a random direction
         direction = random.choice(["a", "d"])

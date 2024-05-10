@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+from clean import clean, scan
 
 GPIO.setmode(GPIO.BCM)
 
@@ -8,6 +9,7 @@ def reset_gpio():
 
 
 def start_task():
+    scan()
     print("Start task")
 
 
@@ -22,6 +24,7 @@ def home_task():
 def main():
     try:
         reset_gpio()
+        GPIO.output((14, 15, 18, 23, 4, 17, 27, 13, 5, 6, 3, 24, 25, 7, 8), GPIO.LOW)
         while True:
             user_input = input("Enter 'start', 'stop', or 'home': ").strip().lower()
 
