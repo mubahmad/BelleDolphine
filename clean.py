@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
-import time
 import random
 from movement import move
+from accessories import mop, suck, sweep
 
 # Set up GPIO pins
 GPIO.setmode(GPIO.BCM)
@@ -21,7 +21,10 @@ def random_rotation_time():
 
 
 
-def clean():
+def clean(wet, blow, rotate):
+    mop(wet)
+    suck(blow, 70)
+    sweep(rotate, 50)
     # Check for cliff and collision
     if (GPIO.input(cliff_pin)) or not GPIO.input(collision_C):
         move("c", 50)

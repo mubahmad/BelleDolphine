@@ -6,14 +6,14 @@ test push to dev
 
 ### GPIO connections
 
-#### Sensors:
+#### Sensors
 
 - GPIO 14 -> right IR
 - GPIO 15 -> center IR
 - GPIO 18 -> left IR
 - GPIO 23 -> cliff sensor
 
-#### Motors:
+#### Motors
 
 - GPIO 4 -> Right motor ENB
 - GPIO 17 -> Right motor in3
@@ -21,8 +21,9 @@ test push to dev
 - GPIO 13 -> Left motor ENA
 - GPIO 5 -> Left motor in2
 - GPIO 6 -> Left motor in1
+- GPIO 3 -> Wet Mop Servo
 
-#### Accessories:
+#### Accessories
 
 - GPIO 24 -> Blower ENA
 - GPIO 25 -> Blower in1
