@@ -3,7 +3,7 @@ import numpy as np
 import pyqrcode
 import os
 
-# Step 1: Generate and save 10 QR codes
+
 qr_library_path = "qr_library"
 os.makedirs(qr_library_path, exist_ok=True)
 
