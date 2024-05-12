@@ -18,6 +18,10 @@ in4 = 6
 
 
 GPIO.setmode(GPIO.BCM)
+pwrL = GPIO.PWM(en_a, 100)
+pwrR = GPIO.PWM(en_b, 100)
+
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(in1, GPIO.OUT)
 GPIO.setup(in2, GPIO.OUT)
 GPIO.setup(en_a, GPIO.OUT)
@@ -37,11 +41,6 @@ def move(x, power):
     # Wrap main content in a try block so we can  catch the user pressing CTRL-C and run the
     # GPIO cleanup function. This will also prevent the user seeing lots of unnecessary error messages.
     try:
-        # Create Infinite loop to read user input
-        GPIO.setmode(GPIO.BCM)
-        pwrL = GPIO.PWM(en_a, 100)
-        pwrR = GPIO.PWM(en_b, 100)
-
         # Get user Input
         pwrL.start(power)
         pwrR.start(power)
