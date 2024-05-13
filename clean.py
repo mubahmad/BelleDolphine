@@ -17,8 +17,8 @@ GPIO.setup(collision_L, GPIO.IN)
 
 def clean(wet, blow, rotate):
     mop(wet)
-    suck(blow, 100)
-    sweep(rotate, 70)
+    # suck(blow, 100)
+    # sweep(rotate, 70)
     # Check for cliff and collision
     if (GPIO.input(cliff_pin)) or not GPIO.input(collision_C):
         print("moving backwards")
@@ -39,7 +39,7 @@ def clean(wet, blow, rotate):
         move("a", 50)
     else:
         print("clear")
-        move("w", 50)
+        move("w", 10)
 
 def scan():
     # Check for cliff and collision
