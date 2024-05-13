@@ -1,11 +1,10 @@
 import RPi.GPIO as GPIO
 import time
-from clean import scan
+from clean import scan, clean
 
 try:
     while True:
-        scan()
-        time.sleep(3)
+        clean(True, True, True)
 except KeyboardInterrupt:
     print("Program terminated")
 finally:
