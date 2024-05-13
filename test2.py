@@ -1,7 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-from clean import scan, clean
-
+from clean import clean
 try:
     while True:
         clean(True, True, True)

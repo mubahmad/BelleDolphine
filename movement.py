@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-from time import sleep
 
 GPIO.setwarnings(False)
 
@@ -16,11 +15,6 @@ en_b = 13
 in3 = 5
 in4 = 6
 
-
-GPIO.setmode(GPIO.BCM)
-pwrL = GPIO.PWM(en_a, 100)
-pwrR = GPIO.PWM(en_b, 100)
-
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(in1, GPIO.OUT)
 GPIO.setup(in2, GPIO.OUT)
@@ -29,6 +23,10 @@ GPIO.setup(en_a, GPIO.OUT)
 GPIO.setup(in3, GPIO.OUT)
 GPIO.setup(in4, GPIO.OUT)
 GPIO.setup(en_b, GPIO.OUT)
+
+GPIO.setmode(GPIO.BCM)
+pwrL = GPIO.PWM(en_a, 100)
+pwrR = GPIO.PWM(en_b, 100)
 
 GPIO.output(in1, GPIO.LOW)
 GPIO.output(in2, GPIO.LOW)
