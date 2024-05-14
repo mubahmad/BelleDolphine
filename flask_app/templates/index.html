@@ -37,7 +37,48 @@
         Submit
       </button>
     </form>
-    <div id="spinnerHolder"></div>
+    <div class="mt-2" id="spinnerHolder"></div>
+    <div>
+      <button class="btn btn-success">start</button>
+      <button class="btn btn-danger">stop</button>
+      <button class="btn btn-warning">home</button>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">name</th>
+          <th scope="col">clean</th>
+          <th scope="col">wet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">3</th>
+          <td>kitchen</td>
+          <td>no</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>bedroom</td>
+          <td>no</td>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>living room</td>
+          <td>yes</td>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>living room</td>
+          <td>yes</td>
+          <td>no</td>
+        </tr>
+      </tbody>
+    </table>
     <script>
       const spinnterTag = `<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>`;
 
