@@ -27,7 +27,7 @@ def configure_wifi():
                 "connect",
                 ssid,
                 "ifname",
-                "wlan0",
+                "wlan1",
                 "password",
                 password,
             ],
