@@ -9,30 +9,38 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/api/configure", methods=["POST"])
+@app.route("/api/configure", methods=["POST", "GET"])
 def configure_wifi():
-    body = request.json
+    if request.method == "POST":
+        body = request.json
 
-    ssid = body["ssid"]
-    password = body["password"]
+        ssid = body["ssid"]
+        password = body["password"]
 
-    # Configure Wi-Fi
-    subprocess.run(
-        ["sudo", "wpa_passphrase", ssid, password],
-        check=True,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
-    subprocess.run(
-        ["sudo", "wpa_cli", "-i", "wlan0", "reconfigure"],
-        check=True,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
+        # Configure Wi-Fi
+        subprocess.run(
+            [
+                "sudo",
+                "nmcli",
+                "device",
+                "wifi",
+                "connect",
+                ssid,
+                "ifname",
+                "wlan0",
+                "password",
+                password,
+            ],
+            check=True,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
 
-    return {"status": "success"}
+        return {"status": "success"}
+    if request.method == "GET":
+        print(subprocess.check_output("netsh wlan show interfaces").decode())
+        return {"status": "success"}
 
 
 if __name__ == "__main__":
