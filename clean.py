@@ -15,10 +15,10 @@ GPIO.setup(collision_R, GPIO.IN)
 GPIO.setup(collision_C, GPIO.IN)
 GPIO.setup(collision_L, GPIO.IN)
 
-def clean(wet, blow, rotate, speed):
-    mop(wet)
+def clean(blow, rotate, wet, speed):
     suck(blow, 100)
     sweep(rotate, 70)
+    mop(wet)
     # Check for cliff and collision
     if (GPIO.input(cliff_pin)) or not GPIO.input(collision_C):
         print("moving backwards")

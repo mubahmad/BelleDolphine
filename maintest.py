@@ -1,15 +1,51 @@
 import RPi.GPIO as GPIO
 from clean import clean
 
+######## SETUP
 GPIO.setmode(GPIO.BCM)
 
+GPIO.setup(14, GPIO.OUT)
+GPIO.setup(14, GPIO.OUT)
+GPIO.setup(15, GPIO.OUT)
+GPIO.setup(18, GPIO.OUT)
+GPIO.setup(23, GPIO.OUT)
+GPIO.setup(4, GPIO.OUT)
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
+GPIO.setup(13, GPIO.OUT)
+GPIO.setup(5, GPIO.OUT)
+GPIO.setup(6, GPIO.OUT)
+GPIO.setup(3, GPIO.OUT)
+GPIO.setup(24, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(7, GPIO.OUT)
+GPIO.setup(8, GPIO.OUT)
+
+GPIO.output(14, GPIO.LOW)
+GPIO.output(15, GPIO.LOW)
+GPIO.output(18, GPIO.LOW)
+GPIO.output(23, GPIO.LOW)
+GPIO.output(4, GPIO.LOW)
+GPIO.output(17, GPIO.LOW)
+GPIO.output(27, GPIO.LOW)
+GPIO.output(13, GPIO.LOW)
+GPIO.output(5, GPIO.LOW)
+GPIO.output(6, GPIO.LOW)
+GPIO.output(3, GPIO.LOW)
+GPIO.output(24, GPIO.LOW)
+GPIO.output(25, GPIO.LOW)
+GPIO.output(7, GPIO.LOW)
+GPIO.output(8, GPIO.LOW)
+
+
+####### Functions
 
 def reset_gpio():
     GPIO.cleanup()
 
 
 def start_task():
-    clean(True, True, True, 20)
+    clean(True, True, False, 20)
     print("Start task")
 
 
@@ -24,9 +60,8 @@ def home_task():
 def main():
     try:
         reset_gpio()
-        GPIO.output((14, 15, 18, 23, 4, 17, 27, 13, 5, 6, 3, 24, 25, 7, 8), GPIO.LOW)
         while True:
-            user_input = input("Enter 'start', 'stop', or 'home': ").strip().lower()
+            user_input = input("Enter 'start', 'stop', or 'home': ")
 
             if user_input == "start":
                 start_task()

@@ -23,9 +23,12 @@ GPIO.setup(servo_pin, GPIO.OUT)
 GPIO.output(in1, GPIO.LOW)
 GPIO.output(in3, GPIO.LOW)
 
+pwrB = GPIO.PWM(en_a, 100)  # Set PWM frequency to 100 Hz
+pwrS = GPIO.PWM(en_b, 100)  # Set PWM frequency to 100 Hz
+
+
 
 def suck(state, power):
-    pwrB = GPIO.PWM(en_a, 200)  # Set PWM frequency to 100 Hz
     pwrB.start(0)  # Initialize with 0 power to stop sucking
 
     if state:
@@ -37,14 +40,13 @@ def suck(state, power):
         GPIO.output(in1, GPIO.LOW)
         print("not sucking")
 
-
 def sweep(state, power):
-    pwrS = GPIO.PWM(en_b, 100)
-    pwrS.start(0)
+    pwrS.start(0)  # Initialize with 0 power to stop sucking
+
     if state:
         pwrS.ChangeDutyCycle(power)  # Start sucking with the specified power
         GPIO.output(in3, GPIO.HIGH)
-        print("sweep")
+        print("sweeping")
     else:
         pwrS.ChangeDutyCycle(0)  # Stop sucking
         GPIO.output(in3, GPIO.LOW)
