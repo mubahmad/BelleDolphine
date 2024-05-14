@@ -15,31 +15,31 @@ GPIO.setup(collision_R, GPIO.IN)
 GPIO.setup(collision_C, GPIO.IN)
 GPIO.setup(collision_L, GPIO.IN)
 
-def clean(wet, blow, rotate):
+def clean(wet, blow, rotate, speed):
     mop(wet)
-    # suck(blow, 100)
-    # sweep(rotate, 70)
+    suck(blow, 100)
+    sweep(rotate, 70)
     # Check for cliff and collision
     if (GPIO.input(cliff_pin)) or not GPIO.input(collision_C):
         print("moving backwards")
-        move("s", 50)
-        time.sleep(2)
+        move("s", speed)
+        time.sleep(1)
         print("rotating")
-        rotation_time = random.uniform(1,4)
+        rotation_time = random.uniform(0.5,1.5)
         # Generate a random direction
         direction = random.choice(["a", "d"])
-        move(direction, 50)
+        move(direction, speed)
         time.sleep(rotation_time)
         print("stopped rotating")
     elif not GPIO.input(collision_L):
         print("object in left")
-        move("d", 50)
+        move("d", speed+10)
     elif not GPIO.input(collision_R):
         print("object in right")
-        move("a", 50)
+        move("a", speed+10)
     else:
         print("clear")
-        move("w", 10)
+        move("w", speed)
 
 def scan():
     # Check for cliff and collision

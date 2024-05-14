@@ -25,7 +25,7 @@ GPIO.output(in3, GPIO.LOW)
 
 
 def suck(state, power):
-    pwrB = GPIO.PWM(en_a, 100)  # Set PWM frequency to 100 Hz
+    pwrB = GPIO.PWM(en_a, 200)  # Set PWM frequency to 100 Hz
     pwrB.start(0)  # Initialize with 0 power to stop sucking
 
     if state:
