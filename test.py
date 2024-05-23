@@ -1,37 +1,39 @@
 import RPi.GPIO as GPIO
 import time
 
-# Set up GPIO using BCM numbering
+# Set the GPIO mode
 GPIO.setmode(GPIO.BCM)
 
-# Define GPIO pins for the H-bridge
-enb_pin = 7
-in3_pin = 8
+# Define the GPIO pin where the servo is connected
+SERVO_PIN = 3
 
-# Set up GPIO pins for the H-bridge
-GPIO.setup(enb_pin, GPIO.OUT)
-GPIO.setup(in3_pin, GPIO.OUT)
+# Set up the GPIO pin for PWM (Pulse Width Modulation)
+GPIO.setup(SERVO_PIN, GPIO.OUT)
+pwm = GPIO.PWM(SERVO_PIN, 50)  # 50Hz PWM frequency
 
-# Create PWM object for motor speed control
-motor_pwm = GPIO.PWM(enb_pin, 100)  # PWM with frequency 100Hz
+# Start PWM with a duty cycle of 0 (servo not moving)
+pwm.start(0)
 
+def set_servo_angle(servo_pin, angle):
+    """Set the angle of the servo motor."""
+    duty_cycle = 2 + (angle / 18)  # Convert angle to duty cycle
+    GPIO.output(servo_pin, True)
+    pwm.ChangeDutyCycle(duty_cycle)
+    time.sleep(1)  # Allow the servo to reach the position
+    GPIO.output(servo_pin, False)
+    pwm.ChangeDutyCycle(0)
 
-def sweep_motor():
-    # Move the motor forward
-    GPIO.output(in3_pin, GPIO.HIGH)
-
-    # Start PWM with 50% duty cycle
-    motor_pwm.start(50)
-
-
-# Cleanup GPIO on exit
-def cleanup():
-    GPIO.cleanup()
-
+def move_servo_based_on_condition(condition):
+    """Move servo to 90 degrees if condition is True, otherwise to 180 degrees."""
+    if condition:
+        set_servo_angle(SERVO_PIN, 90)
+    else:
+        set_servo_angle(SERVO_PIN, 180)
 
 # Example usage
-while True:
-    try:
-        sweep_motor()
-    except KeyboardInterrupt:
-        cleanup()  # Cleanup GPIO on Ctrl+C
+try:
+    condition = True  # Replace with your actual condition
+    move_servo_based_on_condition(True)
+finally:
+    pwm.stop()
+    GPIO.cleanup()

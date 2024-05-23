@@ -21,12 +21,12 @@ def home_task():
     print("Home task")
 
 
-def main():
+def main(input):
     try:
         reset_gpio()
         GPIO.output((14, 15, 18, 23, 4, 17, 27, 13, 5, 6, 3, 24, 25, 7, 8), GPIO.LOW)
         while True:
-            user_input = input("Enter 'start', 'stop', or 'home': ").strip().lower()
+            user_input = input
 
             if user_input == "start":
                 start_task()
