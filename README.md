@@ -2,8 +2,6 @@
 
 Hello this is our automated vacuum cleaner BelleDolphine. We hope we graduate
 
-test push to dev
-
 ### GPIO connections
 
 #### Sensors

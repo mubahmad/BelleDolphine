@@ -34,7 +34,7 @@ while True:
     frame_with_bbox = detect_and_draw(frame)
 
     # Display the resulting frame
-    cv.imshow('QR Code Detection', frame_with_bbox)
+    print(frame_with_bbox)
 
     # Break the loop if 'q' is pressed
     if cv.waitKey(1) & 0xFF == ord('q'):

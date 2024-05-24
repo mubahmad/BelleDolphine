@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import subprocess
+from main import main
 
 app = Flask(__name__)
 
