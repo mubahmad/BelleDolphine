@@ -6,6 +6,7 @@ try:
     while True:
         # suck(True, 100)
         # sweep(True, 70)
+        
         clean(True, True, False, 20)
 except KeyboardInterrupt:
     print("Program terminated")

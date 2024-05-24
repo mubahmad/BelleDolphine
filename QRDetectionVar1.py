@@ -1,5 +1,6 @@
 import cv2 as cv
 import numpy as np
+from picamera2 import Picamera2 
 
 # Create a QRCodeDetector object
 detector = cv.QRCodeDetector()
@@ -20,15 +21,12 @@ def detect_and_draw(frame):
     return frame
 
 # Initialize video capture
-cap = cv.VideoCapture(0)  # Use 0 for the default camera
+cap = Picamera2()  # Use 0 for the default camera 14 15 21 22
+cap.start()
 
 while True:
     # Capture frame-by-frame
-    ret, frame = cap.read()
-
-    if not ret:
-        print("Failed to capture frame")
-        break
+    frame = cap.capture_array()
 
     # Detect and draw QR code bounding box
     frame_with_bbox = detect_and_draw(frame)
@@ -41,5 +39,4 @@ while True:
         break
 
 # Release the capture
-cap.release()
-cv.destroyAllWindows()
+cap.stop()

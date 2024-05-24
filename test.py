@@ -17,10 +17,8 @@ pwm.start(0)
 def set_servo_angle(servo_pin, angle):
     """Set the angle of the servo motor."""
     duty_cycle = 2 + (angle / 18)  # Convert angle to duty cycle
-    GPIO.output(servo_pin, True)
     pwm.ChangeDutyCycle(duty_cycle)
     time.sleep(1)  # Allow the servo to reach the position
-    GPIO.output(servo_pin, False)
     pwm.ChangeDutyCycle(0)
 
 def move_servo_based_on_condition(condition):
@@ -30,10 +28,13 @@ def move_servo_based_on_condition(condition):
     else:
         set_servo_angle(SERVO_PIN, 180)
 
-# Example usage
+# Example usage with infinite loop
 try:
-    condition = True  # Replace with your actual condition
-    move_servo_based_on_condition(True)
+    while True:
+        move_servo_based_on_condition(True)
+        time.sleep(1)  # Wait for 1 second
+        move_servo_based_on_condition(False)
+        time.sleep(1)  # Wait for 1 second
 finally:
     pwm.stop()
     GPIO.cleanup()
