@@ -3,6 +3,7 @@ import random
 from movement import move
 import time
 from accessories import mop, suck, sweep
+# from test2 import modeOfOperation
 
 # Set up GPIO pins
 GPIO.setmode(GPIO.BCM)

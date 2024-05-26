@@ -24,9 +24,9 @@ def set_servo_angle(servo_pin, angle):
 def move_servo_based_on_condition(condition):
     """Move servo to 90 degrees if condition is True, otherwise to 180 degrees."""
     if condition:
-        set_servo_angle(SERVO_PIN, 90)
+        set_servo_angle(SERVO_PIN, 120)
     else:
-        set_servo_angle(SERVO_PIN, 180)
+        set_servo_angle(SERVO_PIN, 190)
 
 # Example usage with infinite loop
 try:

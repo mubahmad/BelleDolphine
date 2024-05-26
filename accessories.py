@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+from time import sleep
 
 GPIO.setwarnings(False)
 
@@ -22,9 +23,11 @@ GPIO.setup(servo_pin, GPIO.OUT)
 
 GPIO.output(in1, GPIO.LOW)
 GPIO.output(in3, GPIO.LOW)
+GPIO.PWM(servo_pin, 50).start(0)
 
 pwrB = GPIO.PWM(en_a, 100)  # Set PWM frequency to 100 Hz
 pwrS = GPIO.PWM(en_b, 100)  # Set PWM frequency to 100 Hz
+pwmSRV = GPIO.PWM(servo_pin, 50) #servo frequency
 
 
 
@@ -53,9 +56,15 @@ def sweep(state, power):
         print("not sweeping")
 
 
-def mop(state):
-    srv = GPIO.PWM(servo_pin, 100)
-    if state:  # Move to position 1 (e.g., True)
-        srv.start(2.5)  # Duty cycle for position 1
-    else:  # Move to position 2 (e.g., False)
-        srv.start(7.5)  # Duty cycle for position 2
+def set_servo_angle(servo_pin, angle):
+    """Set the angle of the servo motor."""
+    duty_cycle = 2 + (angle / 18)  # Convert angle to duty cycle
+    pwmSRV.ChangeDutyCycle(duty_cycle)
+    pwmSRV.ChangeDutyCycle(0)
+
+def mop(condition):
+    """Move servo to 90 degrees if condition is True, otherwise to 180 degrees."""
+    if condition:
+        set_servo_angle(servo_pin, 120)
+    else:
+        set_servo_angle(servo_pin, 190)
