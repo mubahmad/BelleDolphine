@@ -2,11 +2,19 @@ from picamera2.picamera2 import Picamera2
 import cv2
 import numpy as np
 import RPi.GPIO as GPIO
+from movement import move
+from time import sleep
 
 def getInRoom(retval, ratio, center):
-    print('going in')
-    GPIO.cleanup() 
-    return
+    move('a',20)
+    sleep(2)
+    move('w',20)    
+    sleep(2)
+    move('d',20)
+    sleep(2)
+    move('w',20)
+    sleep(2)
+    return 2
 
 
 
@@ -72,7 +80,7 @@ def ratio_and_center_of_quadrilateral_area_to_image(image):
         raise ValueError("Image not found or unable to load.")
     
     # Get image dimensions
-    image_height, image_width, _ = image.shape
+    image_height, image_width = image.shape
     image_area = image_height * image_width
     
     # Create a QRCode detector

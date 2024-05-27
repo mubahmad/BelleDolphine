@@ -5,6 +5,7 @@ import time
 from accessories import mop, suck, sweep
 from cameraHandler import grabFrame
 from qrHandler import ratio_and_center_of_quadrilateral_area_to_image , getInRoom
+from time import sleep
 # from test2 import modeOfOperation
 
 # Set up GPIO pins
@@ -25,34 +26,53 @@ def scan(speed,camera):
 
     frame=grabFrame(camera)
     retval, ratio, center = ratio_and_center_of_quadrilateral_area_to_image(frame)
+    move('a',12)
     if retval:
-        print(center)
-        
+        move('c',20)
+        while center>0.15 or center <-0.15:
+            if center>0:
+                # print('going left')
+                move('a',10)
+                sleep(1)
+            else:
+                move('d',10)
+                sleep(1)
+
+                # print('going right')
+            
+            frame=grabFrame(camera)
+            while True:
+                retval, ratio, center = ratio_and_center_of_quadrilateral_area_to_image(frame)
+                if retval:
+                    break
+            print(center)
+        move('c',10)
         return 1 
    
     
     else:
+        # print('no')
     # Check for cliff and collision
         if (GPIO.input(cliff_pin)) or not GPIO.input(collision_C):
             print("moving backwards")
-            move("s", speed)
+            move("s", 20)
             time.sleep(1)
             print("rotating")
             rotation_time = random.uniform(0.5,1.5)
             # Generate a random direction
             direction = random.choice(["a", "d"])
-            move(direction, speed)
+            move(direction, 20)
             time.sleep(rotation_time)
             print("stopped rotating")
         elif not GPIO.input(collision_L):
             print("object in left")
-            move("d", speed+10)
+            move("d", 20)
         elif not GPIO.input(collision_R):
             print("object in right")
-            move("a", speed+10)
+            move("a", 20)
         else:
             print("clear")
-            move("w", speed)
+            move("w", 10)
     return 0
 
 # def scan():

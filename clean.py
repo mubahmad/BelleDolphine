@@ -41,6 +41,8 @@ def clean(blow, rotate, wet, speed):
     else:
         print("clear")
         move("w", speed)
+    return 2
+    
 
 def scan():
     # Check for cliff and collision
