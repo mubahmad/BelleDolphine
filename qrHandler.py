@@ -5,16 +5,20 @@ import RPi.GPIO as GPIO
 from movement import move
 from time import sleep
 
-def getInRoom(retval, ratio, center):
-    move('a',20)
-    sleep(2)
-    move('w',20)    
-    sleep(2)
-    move('d',20)
-    sleep(2)
+def getInRoom():
+    move('w',20)
+    sleep(0.5)
+    move('a',10)
+    sleep(0.5)
+    move('d',10)
+    sleep(0.5)
+    move('a',50)
+    sleep(0.5)
     move('w',20)
     sleep(2)
-    return 2
+    move('d',50)
+    sleep(0.3)
+    return 6
 
 
 

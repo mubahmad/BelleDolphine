@@ -41,28 +41,45 @@ def clean(blow, rotate, wet, speed):
     else:
         print("clear")
         move("w", speed)
-    return 2
+    
+    if GPIO.input(cliff_pin):
+        move('c',4)
+        suck(False, 100)
+        sweep(False, 70)
+        time.sleep(10)
+        return 3
+    else :
+        return 2
     
 
-def scan():
+def scam():
     # Check for cliff and collision
-    if (GPIO.input(cliff_pin)) or not GPIO.input(collision_C):
+    if not GPIO.input(collision_C):
         print("moving backwards")
-        move("s", 50)
+        move("s", 20)
         time.sleep(2)
         print("rotating")
         rotation_time = random.uniform(1,4)
         # Generate a random direction
         direction = random.choice(["a", "d"])
-        move(direction, 50)
+        move(direction, 20)
         time.sleep(rotation_time)
         print("stopped rotating")
     elif not GPIO.input(collision_L):
         print("object in left")
-        move("d", 50)
+        move("d", 20)
     elif not GPIO.input(collision_R):
         print("object in right")
-        move("a", 50)
+        move("a", 20)
     else:
         print("clear")
-        move("w", 50)
+        move("w", 20)
+
+    if GPIO.input(cliff_pin):
+        move('c',4)
+        suck(False, 100)
+        sweep(False, 70)
+        time.sleep(10)
+        return 7
+    else :
+        return 6
