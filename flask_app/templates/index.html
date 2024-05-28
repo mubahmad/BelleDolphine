@@ -38,10 +38,33 @@
       </button>
     </form>
     <div class="mt-2" id="spinnerHolder"></div>
-    <div>
-      <button class="btn btn-success">start</button>
-      <button class="btn btn-danger">stop</button>
-      <button class="btn btn-warning">home</button>
+    <div class="d-flex flex-row align-items-center">
+      <button
+        class="btn me-2 btn-warning"
+        id="startBtn"
+        onclick="changeStateOfOp(1)"
+      >
+        start
+      </button>
+      <button
+        id="stopBtn"
+        class="btn me-2 btn-warning"
+        onclick="changeStateOfOp(2)"
+      >
+        stop
+      </button>
+      <button
+        id="homeBtn"
+        class="btn me-2 btn-warning"
+        onclick="changeStateOfOp(3)"
+      >
+        home
+      </button>
+      <div
+        class="spinner-border d-none"
+        id="loadingSpinner"
+        role="status"
+      ></div>
     </div>
     <table class="table">
       <thead>
@@ -56,26 +79,24 @@
         <tr>
           <th scope="row">3</th>
           <td>kitchen</td>
-          <td>no</td>
-          <td>yes</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>bedroom</td>
-          <td>no</td>
-          <td>no</td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>living room</td>
-          <td>yes</td>
-          <td>no</td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td>living room</td>
-          <td>yes</td>
-          <td>no</td>
+          <td>
+            <select
+              class="form-select form-select-sm w-25"
+              aria-label="Small select example"
+            >
+              <option value="1" selected>yes</option>
+              <option value="2">no</option>
+            </select>
+          </td>
+          <td>
+            <select
+              class="form-select form-select-sm w-25"
+              aria-label="Small select example"
+            >
+              <option value="1">yes</option>
+              <option value="2" selected>no</option>
+            </select>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -102,6 +123,61 @@
         console.log(response);
         document.getElementById("spinnerHolder").innerHTML = "";
       }
+
+      async function changeStateOfOp(newState) {
+        settingValue = true;
+
+        document.getElementById("loadingSpinner").classList.remove("d-none");
+
+        document.getElementById("startBtn").disabled = true;
+        document.getElementById("stopBtn").disabled = true;
+        document.getElementById("homeBtn").disabled = true;
+
+        const response = await fetch("/api/state-of-op", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            newState,
+          }),
+        }).then((resp) => resp.json());
+        document.getElementById("startBtn").className =
+          `btn me-2 ${response.currentStateOfOperation === 1 ? "btn-success" : "btn-warning"}`;
+
+        document.getElementById("stopBtn").className =
+          `btn me-2 ${response.currentStateOfOperation === 2 ? "btn-success" : "btn-warning"}`;
+
+        document.getElementById("homeBtn").className =
+          `btn me-2 ${response.currentStateOfOperation === 3 ? "btn-success" : "btn-warning"}`;
+
+        settingValue = false;
+        document.getElementById("loadingSpinner").classList.add("d-none");
+
+        document.getElementById("startBtn").disabled = false;
+        document.getElementById("stopBtn").disabled = false;
+        document.getElementById("homeBtn").disabled = false;
+      }
+
+      let settingValue = false;
+
+      async function fetchCurrentState() {
+        if (settingValue) return;
+
+        const response = await fetch("/api/state-of-op").then((resp) =>
+          resp.json(),
+        );
+        document.getElementById("startBtn").className =
+          `btn me-2 ${response.currentStateOfOperation === 1 ? "btn-success" : "btn-warning"}`;
+
+        document.getElementById("stopBtn").className =
+          `btn me-2 ${response.currentStateOfOperation === 2 ? "btn-success" : "btn-warning"}`;
+
+        document.getElementById("homeBtn").className =
+          `btn me-2 ${response.currentStateOfOperation === 3 ? "btn-success" : "btn-warning"}`;
+      }
+
+      setInterval(fetchCurrentState, 500);
     </script>
   </body>
 </html>

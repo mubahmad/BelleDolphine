@@ -163,3 +163,4 @@ cython_debug/
 
 # manually added
 trials/
+state.json
