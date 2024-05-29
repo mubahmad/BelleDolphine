@@ -46,12 +46,12 @@ def configure_wifi():
 @app.route("/api/state-of-op", methods=["GET", "POST"])
 def current_state_of_op():
     if request.method == "GET":
-        with open("../state.json", "r") as file:
+        with open("state.json", "r") as file:
             return json.loads("".join(file.readlines()))
     if request.method == "POST":
         body = request.json
         new_state_of_op = body["newState"]
-        with open("../state.json", "w") as file:
+        with open("state.json", "w") as file:
             file.write(json.dumps({"currentStateOfOperation": new_state_of_op}))
         return {"currentStateOfOperation": new_state_of_op}
 
